@@ -1,0 +1,67 @@
+# Server Configuration
+server:
+  port: 9091
+
+# Application Configuration
+spring:
+  application:
+    name: USER-SERVICE
+
+  # Security Configuration
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8080/realms/healthconnect-realm
+
+  # DataSource Configuration
+  datasource:
+    url: jdbc:mysql://localhost:3306/user_service?createDatabaseIfNotExist=true
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  # JPA Configuration
+  jpa:
+    hibernate:
+      use-new-id-generator-mappings: false
+    ddl-auto: update
+    generate-ddl: true
+
+# Swagger Configuration
+swagger:
+  base-package: com.healthconnect.userservice
+  title: User Service API Documentation
+  description: API documentation for the User Management service of Healthcare Connect.
+  version: v1
+
+# Management Configuration for Actuator Endpoints
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, metrics, info
+  endpoint:
+    health:
+      show-details: always
+    metrics:
+      export:
+        enabled: true
+
+# User Service Configuration
+app:
+  token-url: "http://localhost:8080/realms/healthconnect-realm/protocol/openid-connect/token"
+  logout-url: "http://localhost:8080/realms/healthconnect-realm/protocol/openid-connect/logout"
+  client-id: "healthconnect-client"
+  client-secret: "CDVXONhkCSSlcm8dpfQ64JVaw5HtggS8"
+
+keycloak:
+  auth-server-url: http://localhost:8080
+  realm: healthconnect-realm
+  resource: healthconnect-client
+  credentials:
+    secret: CDVXONhkCSSlcm8dpfQ64JVaw5HtggS8
+
+keycloak-admin:
+  username: muhammadtabish05@gmail.com
+  password: 123
